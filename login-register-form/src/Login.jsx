@@ -14,7 +14,10 @@ export const Login = (props) => {
               //fetch('https://localhost:7193/api/users',{
               method: 'POST',
               headers:{
-                'Content-Type': 'application/json'},
+                'Content-Type': 'application/json','Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, PATCH, OPTIONS',
+        'Access-Control-Allow-Headers': 'X-Requested-With, content-type, Authorization'}
+            
               body: JSON.stringify({
                 "name": 'string',
                 "sirname": 'string',
