@@ -13,7 +13,11 @@ export const Register = (props) => {
               //fetch('https://localhost:7193/api/users',{
               method: 'POST',
               headers:{
+<<<<<<< HEAD
                 'Content-Type': 'application/json',
+=======
+               'Content-Type': 'application/json',
+>>>>>>> 6740f48d6ea897010d61fe3d03c1f68b49c00c21
                 'Access-Control-Allow-Origin': '*',
                 'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, PATCH, OPTIONS',
                 'Access-Control-Allow-Headers': 'X-Requested-With, content-type, Authorization',
