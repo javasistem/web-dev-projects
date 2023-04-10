@@ -14,6 +14,9 @@ export const Register = (props) => {
               method: 'POST',
               headers:{
                 'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, PATCH, OPTIONS',
+                'Access-Control-Allow-Headers': 'X-Requested-With, content-type, Authorization',
                 //Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiMzMiLCJuYmYiOjE2Nzk4MzQyMDAsImV4cCI6MTY4MDQzOTAwMCwiaWF0IjoxNjc5ODM0MjAwfQ.SgNJ9yampgWt_j3p1hihkEDFROwX6E0efhTOIBm3dWA"},
                 Authorization: "Bearer " + window.token
               }, 
@@ -40,9 +43,11 @@ export const Register = (props) => {
 
                 alert(body);  
               }
-              ) // you can use response body here
-               ;
-         
+              , (error) => {
+                if (error) {
+                console.log(error.message);
+                }
+                });         
         }
         
     

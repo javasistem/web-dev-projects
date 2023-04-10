@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import NavBar from './components/NavBar.js';
+import Form from 'react-bootstrap/Form';
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 window.token = "";
 
@@ -14,7 +17,11 @@ export const Login = (props) => {
               //fetch('https://localhost:7193/api/users',{
               method: 'POST',
               headers:{
-                'Content-Type': 'application/json'},
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, PATCH, OPTIONS',
+                'Access-Control-Allow-Headers': 'X-Requested-With, content-type, Authorization',
+              },
               body: JSON.stringify({
                 "name": 'string',
                 "sirname": 'string',
@@ -37,28 +44,46 @@ export const Login = (props) => {
             .then(response => response.text()) // send response body to next then chain
             .then(body => 
               {
-                if(body)
-                  console.log(body.token )
-
+                    
                 window.token = JSON.parse(body).token;
                 alert(window.token);  
-              }
-              ) // you can use response body here
-               ;
+              })
+              .catch(error => {
+                //Here is still promise
+                alert(error);
+             
+            });         
          
     }
 
     return (
-        <div className="auth-form-container">
+      
+            <Form>
+            <NavBar/>
             <h2>Login</h2>
-            <form className="login-form" onSubmit={handleSubmit}>
-                <label htmlFor="email">email</label>
-                <input value={email} onChange={(e) => setEmail(e.target.value)}type="email" placeholder="youremail@gmail.com" id="email" name="email" />
-                <label htmlFor="password">password</label>
-                <input value={pass} onChange={(e) => setPass(e.target.value)} type="password" placeholder="********" id="password" name="password" />
-                <button type="submit">Log In</button>
+            <form  className="login-form" onSubmit={handleSubmit}>
+            <div class="form-group">
+              <label htmlFor="email">Email</label>
+              <input class="form-control" value={email} onChange={(e) => setEmail(e.target.value)}type="email" placeholder="youremail@gmail.com" id="email" name="email" />
+            </div>
+            <div class="form-group">
+              <label htmlFor="password">Password</label>
+              <input class="form-control" value={pass} onChange={(e) => setPass(e.target.value)} type="password" placeholder="********" id="password" name="password" />
+            </div>
+            <div class="checkbox">
+                <Form.Group className="mb-3" controlId="formBasicCheckbox">
+                  <Form.Check type="checkbox" label="Check me out" />
+                </Form.Group>
+            </div>
+            <div class="form-group">
+              <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-primary"  onClick={handleSubmit}>Submit</button>
+              </div>
+              <div class="col-sm-offset-2 col-sm-10">
+            <button class="btn btn-link"  onClick={() => props.onFormSwitch('register')}>Don't have an account? Register here.</button></div>
+
+            </div>          
             </form>
-            <button className="link-btn" onClick={() => props.onFormSwitch('register')}>Don't have an account? Register here.</button>
-        </div>
+            </Form>
     )
 }
